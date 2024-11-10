@@ -14,6 +14,7 @@ function addTask() {
     const newDeleteBtn = document.createElement("button");
     newDeleteBtn.setAttribute("class", "deleteBtn");
     newDeleteBtn.innerText = "Usuń";
+    newDeleteBtn.addEventListener("click", deleteTask);
     newTaskName.innerText = mainInput.value;
     listToAdd.appendChild(newTask);
     newTask.appendChild(newTaskName);
@@ -46,5 +47,9 @@ function editTask() {
       this.addEventListener("click", editTask);
     }
   });
+}
+function deleteTask() {
+  taskToDelete = this.parentNode;
+  taskToDelete.remove();
 }
 addTaskBtn.addEventListener("click", addTask);
