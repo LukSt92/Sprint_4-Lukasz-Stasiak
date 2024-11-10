@@ -1,18 +1,17 @@
 const addTaskBtn = document.getElementById("addTaskBtn");
 const mainInput = document.getElementById("mainInput");
+const alertMsg = "Nazwa zadania nie może być pusta.";
 
 function addTask() {
-  if (mainInput.value === "") alert("Nazwa zadania nie może być pusta");
+  if (mainInput.value === "") alert(alertMsg);
   else {
     const listToAdd = document.getElementById("toDoList");
     const newTask = document.createElement("li");
     const newTaskName = document.createElement("span");
     const newEditBtn = document.createElement("button");
-    newEditBtn.setAttribute("class", "editBtn");
     newEditBtn.innerText = "Edytuj";
     newEditBtn.addEventListener("click", editTask);
     const newDeleteBtn = document.createElement("button");
-    newDeleteBtn.setAttribute("class", "deleteBtn");
     newDeleteBtn.innerText = "Usuń";
     newDeleteBtn.addEventListener("click", deleteTask);
     newTaskName.innerText = mainInput.value;
@@ -22,26 +21,25 @@ function addTask() {
     newTask.appendChild(newDeleteBtn);
     mainInput.value = "";
   }
+  //
 }
 function editTask() {
   this.removeEventListener("click", editTask);
-  const taskToEdit = this.parentNode;
-  let nameToEdit = taskToEdit.firstChild.innerText;
+  const currentTask = this.parentNode;
+  let nameToEdit = currentTask.firstChild;
   const editInput = document.createElement("input");
-  editInput.setAttribute("id", "temporaryInput");
-  editInput.value = nameToEdit;
-  taskToEdit.insertBefore(editInput, this);
-  const toRemove = document.getElementById("temporaryInput");
-  taskToEdit.firstChild.innerText = "";
+  editInput.value = nameToEdit.innerText;
+  currentTask.insertBefore(editInput, this);
+  nameToEdit.innerText = "";
   this.innerText = "Zatwierdź zmiany";
   this.addEventListener("click", function saveChanges() {
     const validCheck = editInput.value.length > 0;
     console.log(validCheck);
     if (!validCheck) {
-      alert("Nazwa zadania nie może być pusta.");
+      alert(alertMsg);
     } else {
-      taskToEdit.firstChild.innerText = editInput.value;
-      toRemove.remove();
+      nameToEdit.innerText = editInput.value;
+      editInput.remove();
       this.removeEventListener("click", saveChanges);
       this.innerText = "Edytuj";
       this.addEventListener("click", editTask);
