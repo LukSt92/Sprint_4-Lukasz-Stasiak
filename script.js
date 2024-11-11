@@ -16,9 +16,7 @@ function addTask() {
     newDeleteBtn.addEventListener("click", deleteTask);
     newTaskName.innerText = mainInput.value;
     listToAdd.appendChild(newTask);
-    newTask.appendChild(newTaskName);
-    newTask.appendChild(newEditBtn);
-    newTask.appendChild(newDeleteBtn);
+    newTask.append(newTaskName, newEditBtn, newDeleteBtn);
     mainInput.value = "";
   }
 }
