@@ -32,9 +32,8 @@ function editTask() {
   this.addEventListener("click", function saveChanges() {
     const validCheck = editInput.value.length > 0;
     console.log(validCheck);
-    if (!validCheck) {
-      alert(alertMsg);
-    } else {
+    if (!validCheck) alert(alertMsg);
+    else {
       nameToEdit.innerText = editInput.value;
       editInput.remove();
       this.removeEventListener("click", saveChanges);
