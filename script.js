@@ -21,7 +21,6 @@ function addTask() {
     newTask.appendChild(newDeleteBtn);
     mainInput.value = "";
   }
-  //
 }
 function editTask() {
   this.removeEventListener("click", editTask);
